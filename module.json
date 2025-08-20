@@ -1,0 +1,61 @@
+{
+  "id": "true-archetype",
+  "title": "True Archetype",
+  "version": "0.1.0",
+  "compatibility": {
+    "minimum": "12",
+    "verified": "12"
+  },
+  "description": "Helper for building characters using the True Archetype custom rule.",
+  "authors": [
+    {
+      "name": "QNCNXW8R",
+      "discord": "QNCNXW8R",
+      "flags": {}
+    }
+  ],
+  "esmodules": [
+    "scripts/main.js"
+  ],
+  "packs": [
+    {
+      "name": "true-archetype-dedications",
+      "label": "True Archetype Dedications",
+      "path": "packs/true-archetype-dedications.db",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "pf2e"
+    },
+    {
+      "name": "true-archetype-feats",
+      "label": "True Archetype Feats",
+      "path": "packs/true-archetype-feats.db",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "pf2e"
+    }
+  ],
+  "packFolders": [
+    {
+      "name": "True Archetype",
+      "sorting": "m",
+      "packs": [
+        "true-archetype-dedications",
+        "true-archetype-feats"
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ]
+}
