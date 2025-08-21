@@ -39,6 +39,17 @@
         "ASSISTANT": "OWNER"
       },
       "system": "pf2e"
+    },
+    {
+      "name": "true-archetype-errata",
+      "label": "True Archetype Errata",
+      "path": "packs/true-archetype-errata.db",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "pf2e"
     }
   ],
   "packFolders": [
@@ -47,7 +58,8 @@
       "sorting": "m",
       "packs": [
         "true-archetype-dedications",
-        "true-archetype-feats"
+        "true-archetype-feats",
+        "true-archetype-errata"
       ]
     }
   ],
