@@ -1,3 +1,4 @@
+import { regenerateDedications, regenerateFeats } from "./regenerate.js";
 import { registerSettings } from "./settings.js";
 
 Hooks.once("init", () => {
@@ -32,4 +33,50 @@ Hooks.once("ready", async function () {
         });
     //}
     game.settings.set("pf2e", "campaignFeatSections", campaignFeatSections);
+
+    // Helper to check and regenerate a pack if empty
+    async function ensureCompendiumNotEmpty(packKey, regenerateFn) {
+        const pack = game.packs.get(packKey);
+        if (!pack) {
+            console.warn(`True Archetype | Could not find compendium: ${packKey}`);
+            return;
+        }
+
+        // Load index
+        await pack.getIndex();
+        if (pack.index.size > 0) {
+            console.log(`True Archetype | ${packKey} already populated, skipping.`);
+            return;
+        }
+
+        console.log(`True Archetype | ${packKey} is empty, regenerating...`);
+
+        // Temporarily unlock
+        const oldLocked = pack.locked;
+        if (oldLocked) {
+            await pack.configure({ locked: false });
+        }
+
+        try {
+            await regenerateFn(false);
+            console.log(`True Archetype | ${packKey} regenerated.`);
+        } catch (err) {
+            console.error(`True Archetype | Failed to regenerate ${packKey}:`, err);
+        }
+
+        // Relock
+        if (oldLocked) {
+            await pack.configure({ locked: true });
+        }
+    }
+
+    await ensureCompendiumNotEmpty(
+        "true-archetype.true-archetype-dedications",
+        regenerateDedications
+    );
+
+    await ensureCompendiumNotEmpty(
+        "true-archetype.true-archetype-feats",
+        regenerateFeats
+    );
 });

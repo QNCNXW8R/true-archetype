@@ -15,7 +15,7 @@ export class DevTools extends FormApplication {
         super.activateListeners(html);
 
         html.find("#regenerate-dedications").on("click", async () => {
-            await regenerateDedications();
+            await regenerateDedications(true);
         });
 
         html.find("#overwrite-dedications").on("click", async () => {
@@ -23,7 +23,7 @@ export class DevTools extends FormApplication {
         });
 
         html.find("#regenerate-feats").on("click", async () => {
-            await regenerateFeats();
+            await regenerateFeats(true);
         });
 
         html.find("#overwrite-feats").on("click", async () => {

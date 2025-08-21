@@ -1,24 +1,41 @@
-export async function regenerateDedications() {
-    const packName = "temporary-true-archetype-dedications";
-    const label = "Temporary True Archetype Dedications";
+export async function regenerateDedications(temp = true) {
+    let pack = null;
 
-    // Try to locate an existing compendium
-    let pack = game.packs.get(`world.${packName}`);
+    if (temp) {
+        const packName = "temporary-true-archetype-dedications";
+        const label = "Temporary True Archetype Dedications";
 
-    if (!pack) {
-        pack = await CompendiumCollection.createCompendium({
-            entity: "Item",
-            label,
-            name: packName,
-            package: "world",
-            type: "Item"
-        });
+        // Try to locate an existing compendium
+        let tempPack = game.packs.get(`world.${packName}`);
+
+        if (!tempPack) {
+            tempPack = await CompendiumCollection.createCompendium({
+                entity: "Item",
+                label,
+                name: packName,
+                package: "world",
+                type: "Item"
+            });
+        } else {
+            // Empty existing pack
+            const content = await tempPack.getDocuments();
+            for (let doc of content) {
+                await doc.delete();
+            }
+        }
+        pack = tempPack;
     } else {
+        const packName = "true-archetype-dedications";
+
+        // Try to locate an existing compendium
+        let modPack = game.packs.get(`true-archetype.${packName}`);
+
         // Empty existing pack
-        const content = await pack.getDocuments();
+        const content = await modPack.getDocuments();
         for (let doc of content) {
             await doc.delete();
         }
+        pack = modPack;
     }
 
     // Find the official PF2e Feats pack
@@ -101,24 +118,45 @@ export async function overwriteDedications() {
 }
 
 
-export async function regenerateFeats() {
-    const packName = "temporary-true-archetype-feats";
-    const label = "Temporary True Archetype Feats";
+export async function regenerateFeats(temp = true) {
+    let pack = null;
 
-    let pack = game.packs.get(`world.${packName}`);
-    if (!pack) {
-        pack = await CompendiumCollection.createCompendium({
-            entity: "Item",
-            label,
-            name: packName,
-            package: "world",
-            type: "Item"
-        });
+    if (temp) {
+        const packName = "temporary-true-archetype-feats";
+        const label = "Temporary True Archetype Feats";
+
+        // Try to locate an existing compendium
+        let tempPack = game.packs.get(`world.${packName}`);
+
+        if (!tempPack) {
+            tempPack = await CompendiumCollection.createCompendium({
+                entity: "Item",
+                label,
+                name: packName,
+                package: "world",
+                type: "Item"
+            });
+        } else {
+            // Empty existing pack
+            const content = await tempPack.getDocuments();
+            for (let doc of content) {
+                await doc.delete();
+            }
+        }
+        pack = tempPack;
     } else {
-        const content = await pack.getDocuments();
+        const packName = "true-archetype-feats";
+        const label = "True Archetype Feats";
+
+        // Try to locate an existing compendium
+        let modPack = game.packs.get(`true-archetype.${packName}`);
+
+        // Empty existing pack
+        const content = await modPack.getDocuments();
         for (let doc of content) {
             await doc.delete();
         }
+        pack = modPack;
     }
 
     const featsPack = game.packs.get("pf2e.feats-srd");
