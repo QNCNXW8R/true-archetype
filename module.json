@@ -21,7 +21,7 @@
     {
       "name": "true-archetype-dedications",
       "label": "True Archetype Dedications",
-      "path": "packs/true-archetype-dedications.db",
+      "path": "packs/true-archetype-dedications",
       "type": "Item",
       "ownership": {
         "PLAYER": "OBSERVER",
@@ -32,7 +32,7 @@
     {
       "name": "true-archetype-feats",
       "label": "True Archetype Feats",
-      "path": "packs/true-archetype-feats.db",
+      "path": "packs/true-archetype-feats",
       "type": "Item",
       "ownership": {
         "PLAYER": "OBSERVER",
@@ -43,7 +43,7 @@
     {
       "name": "true-archetype-errata",
       "label": "True Archetype Errata",
-      "path": "packs/true-archetype-errata.db",
+      "path": "packs/true-archetype-errata",
       "type": "Item",
       "ownership": {
         "PLAYER": "OBSERVER",
