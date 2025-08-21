@@ -57,5 +57,7 @@
       "name": "English",
       "path": "lang/en.json"
     }
-  ]
+  ],
+  "url": "https://github.com/QNCNXW8R/true-archetype",
+  "manifest": "https://raw.githubusercontent.com/QNCNXW8R/true-archetype/refs/heads/master/module.json"
 }
