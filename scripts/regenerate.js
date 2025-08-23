@@ -366,3 +366,180 @@ function makeTrueArchetypeRules(src, entryMap) {
         }
     }
 }
+
+export async function regenerateErrata(temp = true) {
+    let pack = null;
+
+    if (temp) {
+        const packName = "temporary-true-archetype-errata";
+        const label = "Temporary True Archetype Errata";
+
+        // Try to locate an existing compendium
+        let tempPack = game.packs.get(`world.${packName}`);
+
+        if (!tempPack) {
+            tempPack = await CompendiumCollection.createCompendium({
+                entity: "Item",
+                label,
+                name: packName,
+                package: "world",
+                type: "Item"
+            });
+        } else {
+            // Empty existing pack
+            const content = await tempPack.getDocuments();
+            for (let doc of content) {
+                await doc.delete();
+            }
+        }
+        pack = tempPack;
+    } else {
+        const packName = "true-archetype-errata";
+
+        // Try to locate an existing compendium
+        let modPack = game.packs.get(`true-archetype.${packName}`);
+
+        // Empty existing pack
+        const content = await modPack.getDocuments();
+        for (let doc of content) {
+            await doc.delete();
+        }
+        pack = modPack;
+    }
+
+    // Load errata and base feat template
+    const [errataResp, baseResp] = await Promise.all([
+        fetch("modules/true-archetype/errata/errata.json"),
+        fetch("modules/true-archetype/errata/base-feat.json"),
+    ]);
+
+    const errata = await errataResp.json();
+    const baseFeatTemplate = await baseResp.json();
+
+    const toRemove = [];
+
+    for (const element of errata) {
+        switch (element.key) {
+            case "NewTrueArchetypeFeat": {
+                let featData = foundry.utils.deepClone(baseFeatTemplate);
+
+                const baseDoc = await resolveTarget(element);
+                if (baseDoc) {
+                    featData = baseDoc.toObject();
+                }
+
+                foundry.utils.mergeObject(featData, element.data ?? {}, { overwrite: true });
+                if (element.name) featData.name = element.name;
+
+                if (!featData.system?.slug) {
+                    featData.system ??= {};
+                    featData.system.slug = slugify(featData.name);
+                }
+
+                await pack.importDocument(new CONFIG.Item.documentClass(featData));
+                break;
+            }
+
+            case "ModifyTrueArchetypeFeat": {
+                const targetDoc = await resolveTarget(element);
+                if (!targetDoc) {
+                    console.warn(`Modify target not found for element:`, element);
+                    break;
+                }
+
+                let featData = targetDoc.toObject();
+                foundry.utils.mergeObject(featData, element.data ?? {}, { overwrite: true });
+
+                if (element.data?.name) featData.name = element.data.name;
+                if (!featData.system?.slug) {
+                    featData.system ??= {};
+                    featData.system.slug = slugify(featData.name);
+                }
+
+                await pack.importDocument(new CONFIG.Item.documentClass(featData));
+                toRemove.push(targetDoc);
+                break;
+            }
+
+            case "RemoveTrueArchetypeFeat": {
+                const targetDoc = await resolveTarget(element);
+                if (targetDoc) toRemove.push(targetDoc);
+                break;
+            }
+
+            default:
+                console.warn("Unknown errata key", element);
+                break;
+        }
+    }
+
+    // // Perform removals
+    // for (const doc of toRemove) {
+    //     try {
+    //         const pack = doc.pack ? game.packs.get(doc.pack) : null;
+    //         let relocked = false;
+
+    //         if (pack && pack.locked) {
+    //             await pack.configure({ locked: false });
+    //             relocked = true;
+    //         }
+
+    //         await doc.delete();
+
+    //         if (pack && relocked) {
+    //             await pack.configure({ locked: true });
+    //         }
+    //     } catch (err) {
+    //         console.error("Failed to remove document", doc, err);
+    //     }
+    // }
+}
+
+/** Resolve a target feat by UUID (preferred) or by { compendium, slug } */
+async function resolveTarget(element) {
+    if (element.target) {
+        return fromUuid(element.target);
+    }
+
+    if (element.compendium && element.slug) {
+        const pack = game.packs.get(element.compendium);
+        if (!pack) {
+            console.warn(`Compendium not found: ${element.compendium}`);
+            return null;
+        }
+        const docs = await pack.getDocuments();
+        return docs.find(d => d.system?.slug === element.slug) ?? null;
+    }
+
+    return null;
+}
+
+function slugify(name) {
+    return name
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
+}
+
+export async function overwriteErrata() {
+    const sourcePack = game.packs.get("world.temporary-true-archetype-errata");
+    const targetPack = game.packs.get("true-archetype.true-archetype-errata");
+    
+    // Delete everything currently in the target pack
+    const existing = await targetPack.getDocuments();
+    if (existing.length > 0) {
+        await targetPack.documentClass.deleteDocuments(
+            existing.map(d => d.id),
+            { pack: targetPack.collection }
+        );
+    }
+
+    // Import fresh docs from source
+    const docs = await sourcePack.getDocuments();
+    await targetPack.documentClass.createDocuments(
+        docs.map(d => d.toObject()),
+        { pack: targetPack.collection }
+    );
+
+    console.log(`True Archetype | Overwrote ${docs.length} documents in ${targetPack.collection}`);
+}

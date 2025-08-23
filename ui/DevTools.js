@@ -1,4 +1,4 @@
-import { overwriteDedications, overwriteFeats, regenerateDedications, regenerateFeats } from "../scripts/regenerate.js";
+import { overwriteDedications, overwriteErrata, overwriteFeats, regenerateDedications, regenerateErrata, regenerateFeats } from "../scripts/regenerate.js";
 
 export class DevTools extends FormApplication {
     static get defaultOptions() {
@@ -28,6 +28,14 @@ export class DevTools extends FormApplication {
 
         html.find("#overwrite-feats").on("click", async () => {
             await overwriteFeats();
+        });
+
+        html.find("#regenerate-errata").on("click", async () => {
+            await regenerateErrata(true);
+        });
+
+        html.find("#overwrite-errata").on("click", async () => {
+            await overwriteErrata();
         });
     }
 }

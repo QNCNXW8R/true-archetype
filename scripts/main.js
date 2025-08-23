@@ -1,4 +1,4 @@
-import { regenerateDedications, regenerateFeats } from "./regenerate.js";
+import { regenerateDedications, regenerateErrata, regenerateFeats } from "./regenerate.js";
 import { registerSettings } from "./settings.js";
 
 Hooks.once("init", () => {
@@ -78,5 +78,10 @@ Hooks.once("ready", async function () {
     await ensureCompendiumNotEmpty(
         "true-archetype.true-archetype-feats",
         regenerateFeats
+    );
+
+    await ensureCompendiumNotEmpty(
+        "true-archetype.true-archetype-errata",
+        regenerateErrata
     );
 });
