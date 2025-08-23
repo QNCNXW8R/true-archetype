@@ -476,26 +476,28 @@ export async function regenerateErrata(temp = true) {
         }
     }
 
-    // // Perform removals
-    // for (const doc of toRemove) {
-    //     try {
-    //         const pack = doc.pack ? game.packs.get(doc.pack) : null;
-    //         let relocked = false;
+    // Perform removals
+    if (!temp) {
+        for (const doc of toRemove) {
+            try {
+                const pack = doc.pack ? game.packs.get(doc.pack) : null;
+                let relocked = false;
 
-    //         if (pack && pack.locked) {
-    //             await pack.configure({ locked: false });
-    //             relocked = true;
-    //         }
+                if (pack && pack.locked) {
+                    await pack.configure({ locked: false });
+                    relocked = true;
+                }
 
-    //         await doc.delete();
+                await doc.delete();
 
-    //         if (pack && relocked) {
-    //             await pack.configure({ locked: true });
-    //         }
-    //     } catch (err) {
-    //         console.error("Failed to remove document", doc, err);
-    //     }
-    // }
+                if (pack && relocked) {
+                    await pack.configure({ locked: true });
+                }
+            } catch (err) {
+                console.error("Failed to remove document", doc, err);
+            }
+        }
+    }
 }
 
 /** Resolve a target feat by UUID (preferred) or by { compendium, slug } */
