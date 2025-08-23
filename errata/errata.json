@@ -1,2 +1,302 @@
 [
+  {
+    "key": "NewTrueArchetypeFeat",
+    "compendium": "pf2e.feats-srd",
+    "slug": "alchemical-power",
+    "data": {
+      "name": "True Alchemical Power",
+      "system": {
+        "category": "truearchetypefeat",
+        "level": {
+          "value": 10
+        },
+        "prerequisites": {
+          "value": [
+            {"value": "True Archetype: Alchemist"},
+            {"value": "master in Crafting"}
+          ]
+        },
+        "slug": "true-alchemical-power",
+        "traits": {
+          "value": ["trueArchetype"]
+        }
+      }
+    }
+  },
+  {
+    "key": "ModifyTrueArchetypeFeat",
+    "compendium": "true-archetype.true-archetype-feats",
+    "slug": "true-eagle-eye",
+    "data": {
+      "system": {
+        "level": {
+          "value": 8
+        }
+      }
+    }
+  },
+  {
+    "key": "ModifyTrueArchetypeFeat",
+    "compendium": "true-archetype.true-archetype-feats",
+    "slug": "true-brilliant-crafter",
+    "data": {
+      "system": {
+        "level": {
+          "value": 4
+        }
+      }
+    }
+  },
+  {
+    "key": "ModifyTrueArchetypeFeat",
+    "compendium": "true-archetype.true-archetype-feats",
+    "slug": "true-master-spotter-investigator",
+    "data": {
+      "system": {
+        "level": {
+          "value": 8
+        }
+      }
+    }
+  },
+  {
+    "key": "ModifyTrueArchetypeFeat",
+    "compendium": "true-archetype.true-archetype-feats",
+    "slug": "true-skill-mastery-investigator",
+    "data": {
+      "system": {
+        "level": {
+          "value": 8
+        }
+      }
+    }
+  },
+  {
+    "key": "ModifyTrueArchetypeFeat",
+    "compendium": "true-archetype.true-archetype-feats",
+    "slug": "true-expert-kinetic-control",
+    "data": {
+      "system": {
+        "level": {
+          "value": 8
+        }
+      }
+    }
+  },
+  {
+    "key": "ModifyTrueArchetypeFeat",
+    "compendium": "true-archetype.true-archetype-feats",
+    "slug": "true-perfections-path",
+    "data": {
+      "system": {
+        "level": {
+          "value": 8
+        }
+      }
+    }
+  },
+  {
+    "key": "ModifyTrueArchetypeFeat",
+    "compendium": "true-archetype.true-archetype-feats",
+    "slug": "true-master-spotter-ranger",
+    "data": {
+      "system": {
+        "level": {
+          "value": 8
+        }
+      }
+    }
+  },
+  {
+    "key": "ModifyTrueArchetypeFeat",
+    "compendium": "true-archetype.true-archetype-feats",
+    "slug": "true-skill-mastery-rogue",
+    "data": {
+      "system": {
+        "level": {
+          "value": 8
+        }
+      }
+    }
+  },
+  {
+    "key": "ModifyTrueArchetypeFeat",
+    "compendium": "true-archetype.true-archetype-feats",
+    "slug": "true-evasiveness-rogue",
+    "data": {
+      "system": {
+        "level": {
+          "value": 8
+        }
+      }
+    }
+  },
+  {
+    "key": "ModifyTrueArchetypeFeat",
+    "compendium": "true-archetype.true-archetype-feats",
+    "slug": "true-signature-synergy",
+    "data": {
+      "system": {
+        "level": {
+          "value": 14
+        }
+      }
+    }
+  },
+  {
+    "key": "ModifyTrueArchetypeFeat",
+    "compendium": "true-archetype.true-archetype-feats",
+    "slug": "true-evasiveness-swashbuckler",
+    "data": {
+      "system": {
+        "level": {
+          "value": 8
+        }
+      }
+    }
+  },
+  {
+    "key": "ModifyTrueArchetypeFeat",
+    "compendium": "true-archetype.true-archetype-feats",
+    "slug": "true-magical-knowledge",
+    "data": {
+      "system": {
+        "level": {
+          "value": 8
+        }
+      }
+    }
+  },
+  {
+    "key": "ModifyTrueArchetypeFeat",
+    "compendium": "true-archetype.true-archetype-feats",
+    "slug": "true-resolute",
+    "data": {
+      "system": {
+        "level": {
+          "value": 8
+        }
+      }
+    }
+  },
+  {
+    "key": "ModifyTrueArchetypeFeat",
+    "compendium": "true-archetype.true-archetype-feats",
+    "slug": "true-cunning-trickster-mask",
+    "data": {
+      "system": {
+        "level": {
+          "value": 20
+        }
+      }
+    }
+  },
+  {
+    "key": "ModifyTrueArchetypeFeat",
+    "compendium": "true-archetype.true-archetype-feats",
+    "slug": "true-emancipators-mask",
+    "data": {
+      "system": {
+        "level": {
+          "value": 20
+        }
+      }
+    }
+  },
+  {
+    "key": "ModifyTrueArchetypeFeat",
+    "compendium": "true-archetype.true-archetype-feats",
+    "slug": "true-grand-medics-mask",
+    "data": {
+      "system": {
+        "level": {
+          "value": 20
+        }
+      }
+    }
+  },
+  {
+    "key": "ModifyTrueArchetypeFeat",
+    "compendium": "true-archetype.true-archetype-feats",
+    "slug": "true-protective-spirit-mask",
+    "data": {
+      "system": {
+        "level": {
+          "value": 20
+        }
+      }
+    }
+  },
+  {
+    "key": "ModifyTrueArchetypeFeat",
+    "compendium": "true-archetype.true-archetype-feats",
+    "slug": "true-sky-master-mask",
+    "data": {
+      "system": {
+        "level": {
+          "value": 20
+        }
+      }
+    }
+  },
+  {
+    "key": "ModifyTrueArchetypeFeat",
+    "compendium": "true-archetype.true-archetype-feats",
+    "slug": "true-stalking-feline-mask",
+    "data": {
+      "system": {
+        "level": {
+          "value": 20
+        }
+      }
+    }
+  },
+  {
+    "key": "ModifyTrueArchetypeFeat",
+    "compendium": "true-archetype.true-archetype-feats",
+    "slug": "true-storytellers-mask",
+    "data": {
+      "system": {
+        "level": {
+          "value": 20
+        }
+      }
+    }
+  },
+  {
+    "key": "ModifyTrueArchetypeFeat",
+    "compendium": "true-archetype.true-archetype-feats",
+    "slug": "true-thick-hide-mask",
+    "data": {
+      "system": {
+        "level": {
+          "value": 20
+        }
+      }
+    }
+  },
+  {
+    "key": "ModifyTrueArchetypeFeat",
+    "compendium": "true-archetype.true-archetype-feats",
+    "slug": "true-tireless-guides-mask",
+    "data": {
+      "system": {
+        "level": {
+          "value": 20
+        }
+      }
+    }
+  },
+  {
+    "key": "ModifyTrueArchetypeFeat",
+    "compendium": "true-archetype.true-archetype-feats",
+    "slug": "true-vigilant-mask",
+    "data": {
+      "system": {
+        "level": {
+          "value": 20
+        }
+      }
+    }
+  }
 ]
