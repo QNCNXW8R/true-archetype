@@ -120,10 +120,11 @@ export async function overwriteDedications() {
 
 export async function regenerateFeats(temp = true) {
     let pack = null;
+    let label = null;
 
     if (temp) {
         const packName = "temporary-true-archetype-feats";
-        const label = "Temporary True Archetype Feats";
+        const labelName = "Temporary True Archetype Feats";
 
         // Try to locate an existing compendium
         let tempPack = game.packs.get(`world.${packName}`);
@@ -144,9 +145,10 @@ export async function regenerateFeats(temp = true) {
             }
         }
         pack = tempPack;
+        label = labelName;
     } else {
         const packName = "true-archetype-feats";
-        const label = "True Archetype Feats";
+        const labelName = "True Archetype Feats";
 
         // Try to locate an existing compendium
         let modPack = game.packs.get(`true-archetype.${packName}`);
@@ -157,6 +159,7 @@ export async function regenerateFeats(temp = true) {
             await doc.delete();
         }
         pack = modPack;
+        label = labelName;
     }
 
     const featsPack = game.packs.get("pf2e.feats-srd");
